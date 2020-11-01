@@ -6,6 +6,7 @@ MainFrame mainFrame;
 
 	public MancalaTester() {
 		buttonFrame = new ButtonFrame();
+		
 		mainFrame = new MainFrame();
 	}
 
