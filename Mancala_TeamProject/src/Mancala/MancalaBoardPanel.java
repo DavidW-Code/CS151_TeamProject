@@ -1,38 +1,60 @@
 package Mancala;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MancalaBoardPanel extends JPanel{
+MancalaModel model;
+MancalaPit mancalaPit;
+StonePit stonePit;
+JLabel stonePitLabel;
+ArrayList<StonePit> stonePitList;
+ArrayList<MancalaPit> mancalaPitList;
 
-	public MancalaBoardPanel() {
+	public MancalaBoardPanel(MancalaModel model) {
+		this.model = model;
 		
-		setPreferredSize(new Dimension(1000,500));
-
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
-		//Not final layout
-		setLayout(new FlowLayout());
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridheight = 2;
+		mancalaPit = new MancalaPit();
+		JLabel mancalaPit1 = new JLabel(mancalaPit);
+		add(mancalaPit1,c);
 		
-		//Testing mancala pit A and B
-		MancalaPit pit = new MancalaPit(0,0);
-		JLabel label = new JLabel(pit);
-		label.setPreferredSize(new Dimension(pit.getIconWidth() + 10,pit.getIconHeight() + 10));
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridheight = 1;
+		c.anchor = GridBagConstraints.PAGE_START;
+		for (int i = 0; i < 6; i++) {
+			stonePit= new StonePit();
+			stonePitLabel = new JLabel(stonePit);
+			add(stonePitLabel,c);
+			c.gridx++;
+		}
 		
-		StonePit test = new StonePit(100);
-		JLabel testPit = new JLabel(test);
-		testPit.setPreferredSize(new Dimension(pit.getIconWidth() + 10,pit.getIconHeight() + 10));
+		c.gridx = 1;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.PAGE_END;
+		for (int i = 0; i < 6; i++) {
+			stonePit= new StonePit();
+			stonePitLabel = new JLabel(stonePit);
+			add(stonePitLabel,c);
+			c.gridx++;
+		}
 		
-		MancalaPit pit2 = new MancalaPit(0,0);
-		JLabel label2 = new JLabel(pit2);
-		label2.setPreferredSize(new Dimension(pit2.getIconWidth() + 10,pit2.getIconHeight() + 10));
-		
-		add(label);
-		add(testPit);
-		add(label2);
-		
+		c.gridx = 7;
+		c.gridy = 0;
+		c.gridheight = 2;
+		mancalaPit = new MancalaPit();
+		JLabel mancalaPit2 = new JLabel(mancalaPit);
+		add(mancalaPit2,c);
 	}
 	
 }

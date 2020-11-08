@@ -9,8 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 public class ButtonFrame {
+MancalaModel model;
 
-	public ButtonFrame() {
+	public ButtonFrame(MancalaModel model) {
+		this.model = model;
 		JFrame buttonFrame = new JFrame();
 		buttonFrame.setLayout(new FlowLayout());
 		
@@ -22,7 +24,8 @@ public class ButtonFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				model.setInitialArray(3);
+				buttonFrame.dispose();
 				
 			}
 			
@@ -32,8 +35,8 @@ public class ButtonFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				model.setInitialArray(4);
+				buttonFrame.dispose();
 			}
 			
 		});

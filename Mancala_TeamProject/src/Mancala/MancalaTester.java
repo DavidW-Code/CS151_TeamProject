@@ -1,13 +1,15 @@
 package Mancala;
 
 public class MancalaTester {
-ButtonFrame buttonFrame;
+ButtonFrame initialButton;
+MancalaModel model;
 MainFrame mainFrame;
 
 	public MancalaTester() {
-		buttonFrame = new ButtonFrame();
+		model = new MancalaModel();
 		
-		mainFrame = new MainFrame();
+		initialButton = new ButtonFrame(model);
+		mainFrame = new MainFrame(model);
 	}
 
 	public static void main(String[] args) {

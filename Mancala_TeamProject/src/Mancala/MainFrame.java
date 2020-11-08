@@ -2,23 +2,21 @@ package Mancala;
 
 import javax.swing.JFrame;
 
-public class MainFrame {
-MancalaBoardPanel test;
+public class MainFrame extends JFrame{
+MancalaBoardPanel mancalaPanel;
+MancalaModel model;
 
-	public MainFrame() {
-		JFrame mainFrame = new JFrame();
+	public MainFrame(MancalaModel model) {
+		this.model = model;
+		mancalaPanel = new MancalaBoardPanel(model);
+		
+		add(mancalaPanel);
 		
 		
-		test = new MancalaBoardPanel();
 		
-		mainFrame.add(test);
-		
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.pack();
-		mainFrame.setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		MainFrame test = new MainFrame();
-	}
 }

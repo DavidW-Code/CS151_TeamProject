@@ -10,18 +10,15 @@ public class MancalaPit implements Icon{
 private static final int PIT_WIDTH = 150;
 private static final int PIT_HEIGHT = 300;
 
-private int xPosition;
-private int yPosition;
 
-	public MancalaPit(int xPosition, int yPosition) {
-		this.xPosition = xPosition;
-		this.yPosition = yPosition;
+	public MancalaPit() {
+		
 	}
 	
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawRoundRect(xPosition, yPosition, PIT_WIDTH, PIT_HEIGHT, 50, 50);
+		g2.drawRoundRect(0, 0, PIT_WIDTH, PIT_HEIGHT, 50, 50);
 		
 	}
 
