@@ -13,6 +13,7 @@ ArrayList<ChangeListener> listenerList;
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
 
+
 	public MancalaModel() {
 		listenerList = new ArrayList<>();
 		PlayerA = new ArrayList<>();
