@@ -8,8 +8,8 @@ MainFrame mainFrame;
 	public MancalaTester() {
 		model = new MancalaModel();
 		
-		initialButton = new ButtonFrame(model);
 		mainFrame = new MainFrame(model);
+		initialButton = new ButtonFrame(model);
 	}
 
 	public static void main(String[] args) {

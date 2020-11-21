@@ -2,22 +2,30 @@ package Mancala;
 
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class MainFrame extends JFrame{
 MancalaBoardPanel mancalaPanel;
+JLayeredPane pane;
 StonePanel stonePanel;
 MancalaModel model;
 
 	public MainFrame(MancalaModel model) {
 		this.model = model;
 		mancalaPanel = new MancalaBoardPanel(model);
-		//stonePanel = new StonePanel(model);
+		mancalaPanel.setBounds(0, 0, 1000, 500);
+		stonePanel = new StonePanel(model);
+		stonePanel.setBounds(0,0,1000,500);
+		stonePanel.setOpaque(false);
+
+		pane = new JLayeredPane();
+		pane.add(mancalaPanel,1);
+		pane.add(stonePanel,0);
 		
-		add(mancalaPanel);
-		//add(stonePanel);
 		
 		class Controller implements ChangeListener{
 			ArrayList<Integer> playerA = model.getPlayerAStones();
@@ -41,8 +49,7 @@ MancalaModel model;
 					numOfStones = playerA.get(i); 
 					for(int j = 0; j< numOfStones; j++) {
 						Stone stone = new Stone();
-						topStones.add(stone);
-						
+						topStones.add(stone);	
 					}
 					
 				}
@@ -53,10 +60,9 @@ MancalaModel model;
 		model.attach(controller);
 
 
-		
-		
+		add(pane);
+		setBounds(0,0,1000,500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
 		setVisible(true);
 	}
 	
