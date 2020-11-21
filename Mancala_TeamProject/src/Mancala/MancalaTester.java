@@ -9,6 +9,8 @@ MainFrame mainFrame;
 		model = new MancalaModel();
 		
 		mainFrame = new MainFrame(model);
+
+		
 		initialButton = new ButtonFrame(model);
 	}
 

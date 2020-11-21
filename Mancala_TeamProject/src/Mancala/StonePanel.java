@@ -25,8 +25,8 @@ ArrayList<JLabel> stoneLabelsList;
 
 		constraint.gridx = 0; //Relative to this panel not the mancala panel
 		constraint.gridy = 0;
-		constraint.ipady = 50;
-		constraint.ipadx = 100;
+		constraint.ipady = 150;
+		constraint.ipadx = 75;
 		constraint.gridheight = 1;
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < numOfStones; j++){
@@ -39,8 +39,8 @@ ArrayList<JLabel> stoneLabelsList;
 
 		constraint.gridx = 0; //Relative to this panel not the mancala panel
 		constraint.gridy = 1;
-		constraint.ipady = 50;
-		constraint.ipadx = 150;
+		constraint.ipady = 0;
+		constraint.ipadx = 75;
 		constraint.gridheight = 1;
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < numOfStones; j++){
