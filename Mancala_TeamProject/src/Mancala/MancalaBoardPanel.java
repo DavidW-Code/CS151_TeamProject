@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 public class MancalaBoardPanel extends JPanel{
-MancalaModel model;
 MancalaPit mancalaPit;
 StonePit stonePit;
 JLabel stonePitLabel;
-ArrayList<StonePit> stonePitList;
-ArrayList<MancalaPit> mancalaPitList;
 
-	public MancalaBoardPanel(MancalaModel model) {
-		this.model = model;
-		
+	public MancalaBoardPanel () {
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -25,8 +26,8 @@ ArrayList<MancalaPit> mancalaPitList;
 		c.gridy = 0;
 		c.gridheight = 2;
 		mancalaPit = new MancalaPit();
-		JLabel mancalaPit1 = new JLabel(mancalaPit);
-		add(mancalaPit1,c);
+		JLabel mancalaPitA = new JLabel(mancalaPit);
+		add(mancalaPitA,c);
 		
 		c.gridx = 1;
 		c.gridy = 0;
@@ -55,6 +56,7 @@ ArrayList<MancalaPit> mancalaPitList;
 		mancalaPit = new MancalaPit();
 		JLabel mancalaPit2 = new JLabel(mancalaPit);
 		add(mancalaPit2,c);
+		
 	}
 	
 }

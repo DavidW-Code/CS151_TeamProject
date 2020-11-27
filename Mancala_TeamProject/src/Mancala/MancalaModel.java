@@ -1,7 +1,6 @@
 package Mancala;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -40,12 +39,12 @@ ArrayList<Integer> PlayerB;
 	
 	//Set the Stones in PlayerA;
 	public void setPlayerAStones(ArrayList<Integer> newPlayerA) {
-		Collections.copy(PlayerA, newPlayerA);
+		this.PlayerA = (ArrayList<Integer>) newPlayerA.clone();
 	}
 		
 	//Set the Stones in PlayerB;
 	public void setPlayerBStones(ArrayList<Integer> newPlayerB) {
-		Collections.copy(PlayerB, newPlayerB);
+		this.PlayerB = (ArrayList<Integer>) newPlayerB.clone();
 	}
 	
 	//Attach Listeners for each View into ListenerList
@@ -61,3 +60,4 @@ ArrayList<Integer> PlayerB;
 		}
 	}
 }
+

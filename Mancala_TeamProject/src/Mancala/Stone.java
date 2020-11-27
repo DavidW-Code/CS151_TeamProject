@@ -7,11 +7,12 @@ import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.geom.Ellipse2D;
 import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Stone implements Icon {
+public class Stone extends JComponent implements Icon{
 
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -33,14 +34,4 @@ public class Stone implements Icon {
 		return 20;
 	}
 
-	public static void main(String[] args) {
-		JFrame pan = new JFrame();
-		Stone s = new Stone();
-		pan.add(new JLabel(s));
-		pan.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pan.pack();
-		pan.setVisible(true);
-
-
-	}
 }

@@ -1,66 +1,100 @@
 package Mancala;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
+
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class StonePanel extends JPanel{
+public class StonePanel extends JPanel implements ChangeListener{
 MancalaModel model;
-JLayeredPane layeredPane;
 Stone stone;
-JLabel stoneLabel;
-ArrayList<Stone> stonesList;
-ArrayList<JLabel> stoneLabelsList;
+ArrayList<Integer> PlayerA;
+ArrayList<Integer> PlayerB;
+ArrayList<JLabel> stoneLabelA;
+ArrayList<JLabel> stoneLabelB;
 
 	public StonePanel(MancalaModel model) {
 		this.model = model;
-		int numOfStones = 3; //For testing, needs to change
+		this.PlayerA = model.getPlayerAStones();
+		this.PlayerB = model.getPlayerBStones();
+		stoneLabelA = new ArrayList<>();
+		stoneLabelB = new ArrayList<>();
+		
 		setLayout(new GridBagLayout());
-		GridBagConstraints constraint = new GridBagConstraints();
-
-		constraint.gridx = 0; //Relative to this panel not the mancala panel
-		constraint.gridy = 0;
-		constraint.ipady = 150;
-		constraint.ipadx = 75;
-		constraint.gridheight = 1;
-		for(int i = 0; i < 6; i++){
-			for(int j = 0; j < numOfStones; j++){
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridheight = 2;
+		JLabel mancalaLabelA = new JLabel();
+		mancalaLabelA.setPreferredSize(new Dimension(150,350));
+		add(mancalaLabelA, c);
+		
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridheight = 1;
+		c.anchor = GridBagConstraints.PAGE_START;
+		for (int i = 0; i < 6; i++) {
+			JLabel stonePitALabel = new JLabel();
+			stonePitALabel.setPreferredSize(new Dimension (115,115));
+			stonePitALabel.setLayout(new FlowLayout());
+			for (int j = 0; j< PlayerA.get(i); j++) {
 				stone = new Stone();
-				stoneLabel = new JLabel(stone);
-				add(stoneLabel, constraint);
-			}	
-			constraint.gridx++;
-		}	
-
-		constraint.gridx = 0; //Relative to this panel not the mancala panel
-		constraint.gridy = 1;
-		constraint.ipady = 0;
-		constraint.ipadx = 75;
-		constraint.gridheight = 1;
-		for(int i = 0; i < 6; i++){
-			for(int j = 0; j < numOfStones; j++){
+				JLabel stoneLabel = new JLabel(stone);
+				stonePitALabel.add(stoneLabel);
+			}
+			add(stonePitALabel, c);
+			stoneLabelA.add(stonePitALabel);
+			c.gridx++;
+		}
+		
+		c.gridx = 1;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.PAGE_END;
+		for (int i = 0; i < 6; i++) {
+			JLabel stonePitBLabel = new JLabel();
+			stonePitBLabel.setPreferredSize(new Dimension (115,115));
+			stonePitBLabel.setLayout(new FlowLayout());
+			for (int j = 0; j < PlayerB.get(i); j++) {
 				stone = new Stone();
-				stoneLabel = new JLabel(stone);
-				add(stoneLabel, constraint);
-			}	
-			constraint.gridx++;
-		}	
+				JLabel stoneLabel = new JLabel(stone);
+				stonePitBLabel.add(stoneLabel);
+			}
+			add(stonePitBLabel, c);
+			stoneLabelB.add(stonePitBLabel);
+			c.gridx++;
+		}
+		
+		c.gridx = 7;
+		c.gridy = 0;
+		c.gridheight = 2;
+		JLabel mancalaLabelB = new JLabel();
+		mancalaLabelB.setPreferredSize(new Dimension(150,350));
+		add(mancalaLabelB, c);
 	}
 
-	public static void main(String[] args) {
-		JFrame pan = new JFrame();
-		MancalaModel mod = new MancalaModel();
-		StonePanel s = new StonePanel(mod);
-		pan.add(s);
-		pan.setBounds(0,0,1000,500);
-		pan.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pan.setVisible(true);
+	
+	
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		
 	}
-
 
 }
