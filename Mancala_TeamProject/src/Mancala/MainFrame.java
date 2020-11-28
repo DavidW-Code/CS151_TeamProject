@@ -17,7 +17,8 @@ StonePanel stonePanel;
 		
 		mancalaPanel = new MancalaBoardPanel();
 		mancalaPanel.setBounds(0, 0, 1000, 500);
-		PLabels = new PlayerLabels();
+		PLabels = new PlayerLabels(model);
+		model.attach(PLabels);
 		PLabels.setBounds(0, 0, 1000, 475);
 		PLabels.setOpaque(false);
 		stonePanel = new StonePanel(model);

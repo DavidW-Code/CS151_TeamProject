@@ -7,6 +7,8 @@ import javax.swing.event.ChangeListener;
 
 public class MancalaModel {
 ArrayList<ChangeListener> listenerList;
+boolean PlayerATurn = true;
+boolean endGame = false;
 
 //ArrayList 0...5 = stones, 6 = pit
 ArrayList<Integer> PlayerA;
@@ -40,6 +42,11 @@ ArrayList<Integer> PlayerB;
 		return PlayerB;
 	}
 	
+	//Returns boolean of if Player A's turn
+	public boolean getPlayerATurn() {
+		return PlayerATurn;
+	}
+	
 	//Set the Stones in PlayerA;
 	public void setPlayerAStones(ArrayList<Integer> newPlayerA) {
 		this.PlayerA = (ArrayList<Integer>) newPlayerA.clone();
@@ -50,15 +57,30 @@ ArrayList<Integer> PlayerB;
 		this.PlayerB = (ArrayList<Integer>) newPlayerB.clone();
 	}
 	
+	//Boolean check if it's Player A's turn
+	public void setPlayerATurn(boolean PlayerATurn) {
+		this.PlayerATurn = PlayerATurn;
+	}
+	
+	//Boolean check to end game
+	public boolean endGame() {
+		return endGame;
+	}
+	
+	//Boolean set to end game
+	public void setEndGame(boolean endGame) {
+		this.endGame = endGame;
+	}
 	//Attach Listeners for each View into ListenerList
 	public void attach(ChangeListener c) {
 		listenerList.add(c);
 	}
 	
 	//Update method used to call stateChanged
-	public void update(ArrayList<Integer> newPlayerA, ArrayList<Integer> newPlayerB) {
+	public void update(ArrayList<Integer> newPlayerA, ArrayList<Integer> newPlayerB, boolean PlayerATurn) {
 		setPlayerAStones(newPlayerA);
 		setPlayerBStones(newPlayerB);
+		setPlayerATurn(PlayerATurn);
 		for (ChangeListener l: listenerList) {
 			l.stateChanged(new ChangeEvent(this));
 		}
