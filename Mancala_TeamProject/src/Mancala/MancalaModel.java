@@ -14,11 +14,16 @@ boolean endGame = false;
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
 
+ArrayList<Integer> PlayerAOld;
+ArrayList<Integer> PlayerBOld;
+
 
 	public MancalaModel() {
 		listenerList = new ArrayList<>();
 		PlayerA = new ArrayList<>();
 		PlayerB = new ArrayList<>();
+		PlayerAOld = new ArrayList<>();
+		PlayerBOld = new ArrayList<>();
 	}
 	
 	//Adds initial 3/4 stones into ArrayList for Player A and Player B
@@ -30,6 +35,24 @@ ArrayList<Integer> PlayerB;
 		
 		PlayerA.add(0);
 		PlayerB.add(0);
+		
+		PlayerAOld = PlayerA;
+		PlayerBOld = PlayerB;
+		
+	}
+	
+	public ArrayList<Integer> getOldAStones() {
+		return PlayerAOld;
+	}
+	
+	public ArrayList<Integer> getOldBStones(){
+		return PlayerBOld;
+	}
+	
+	//Set undo stones arraylist
+	public void setUndoStones(ArrayList<Integer> PlayerA, ArrayList<Integer> PlayerB) {
+		this.PlayerAOld = PlayerA;
+		this.PlayerBOld = PlayerB;
 	}
 	
 	//Get the Stones in PlayerA;

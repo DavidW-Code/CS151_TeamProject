@@ -166,6 +166,7 @@ ArrayList<JLabel> stoneLabelB;
 			stonePitALabel.addMouseListener(new MouseAdapter(){
 				public void mousePressed(MouseEvent e) {
 					pressed = true;
+					
 				}
 				
 				public void mouseReleased(MouseEvent e) {
@@ -360,7 +361,6 @@ ArrayList<JLabel> stoneLabelB;
 			stoneRepaint(stoneLabelA.get(i), PlayerA.get(i));
 			stoneRepaint(stoneLabelB.get(i), PlayerB.get(i));
 		}
-		
 	}
 
 }

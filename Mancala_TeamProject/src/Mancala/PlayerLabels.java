@@ -3,8 +3,13 @@ package Mancala;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
@@ -30,10 +35,34 @@ ArrayList<JLabel> mancalaCountLabels;
 		
 		setLayout(new BorderLayout());
 		
+		JPanel topDisplay = new JPanel();
+		topDisplay.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 3;
 		PlayerID = new JLabel("Player B", JLabel.CENTER);
 		PlayerID.setFont(myFont);
 		PlayerID.setPreferredSize(new Dimension(1000,25));
-		add(PlayerID, BorderLayout.PAGE_START);
+		topDisplay.add(PlayerID,c);
+		
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridwidth = 1;
+		JButton undoButton = new JButton("Undo");
+		undoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Not updating correctly. Pre and Post are the same
+				System.out.println(model.getPlayerAStones());
+				System.out.println(model.getPlayerBStones());
+				model.update(model.getOldAStones(), model.getOldBStones(), model.getPlayerATurn());
+				System.out.println(model.getPlayerAStones());
+				System.out.println(model.getPlayerBStones());
+			}
+		});
+		topDisplay.add(undoButton,c);
+		add(topDisplay, BorderLayout.PAGE_START);
 		
 		mancalaCount = new JLabel("B Stones: " + PlayerB.get(6), JLabel.CENTER);
 		mancalaCount.setFont(myFont);
