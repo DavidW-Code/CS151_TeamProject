@@ -25,6 +25,9 @@ ArrayList<Integer> PlayerB;
 			PlayerA.add(stones);
 			PlayerB.add(stones);
 		}
+		
+		PlayerA.add(0);
+		PlayerB.add(0);
 	}
 	
 	//Get the Stones in PlayerA;
@@ -53,8 +56,9 @@ ArrayList<Integer> PlayerB;
 	}
 	
 	//Update method used to call stateChanged
-	public void update() {
-		
+	public void update(ArrayList<Integer> newPlayerA, ArrayList<Integer> newPlayerB) {
+		setPlayerAStones(newPlayerA);
+		setPlayerBStones(newPlayerB);
 		for (ChangeListener l: listenerList) {
 			l.stateChanged(new ChangeEvent(this));
 		}

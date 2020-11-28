@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Stone extends JComponent implements Icon{
+public class Stone implements Icon{
 
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
