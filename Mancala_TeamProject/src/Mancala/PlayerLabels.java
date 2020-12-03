@@ -133,6 +133,7 @@ ArrayList<JLabel> mancalaCountLabels;
 				mancalaCountLabels.get(1).setText("Player B's Turn");
 			}
 		}
+		revalidate();
 	}
 }
 
