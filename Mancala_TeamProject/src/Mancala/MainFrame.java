@@ -16,7 +16,7 @@ StonePanel stonePanel;
 	public MainFrame(MancalaModel model) {
 		this.model = model;
 		
-		mancalaPanel = new MancalaBoardPanel();
+		mancalaPanel = new MancalaBoardPanel(model);
 		mancalaPanel.setBounds(0, 0, 1000, 500);
 		PLabels = new PlayerLabels(model);
 		model.attach(PLabels);
@@ -41,6 +41,7 @@ StonePanel stonePanel;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		
 	}
 	
 }

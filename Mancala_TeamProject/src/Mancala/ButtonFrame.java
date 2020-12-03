@@ -8,16 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-
-
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-
 public class ButtonFrame {
 MancalaModel model;
 
@@ -35,8 +25,7 @@ MancalaModel model;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				model.setInitialArray(3);
-				
-				MainFrame mainFrame = new MainFrame(model);
+				StyleFrame styleFrame = new StyleFrame(model);
 				
 				buttonFrame.dispose();
 				
@@ -50,7 +39,7 @@ MancalaModel model;
 			public void actionPerformed(ActionEvent e) {
 				model.setInitialArray(4);
 				
-				MainFrame mainFrame = new MainFrame(model);
+				StyleFrame styleFrame = new StyleFrame(model);
 				
 				buttonFrame.dispose();
 			}

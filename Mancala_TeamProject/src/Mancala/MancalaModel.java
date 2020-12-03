@@ -1,6 +1,9 @@
 package Mancala;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -17,9 +20,11 @@ ArrayList<Integer> PlayerB;
 ArrayList<Integer> PlayerAOld;
 ArrayList<Integer> PlayerBOld;
 boolean oldPlayerATurn;
-
 ArrayList<Boolean> playerTurnList;
 
+Strategy strategy;
+ArrayList<String> colorList;
+HashMap<Integer,Color> colorMap;
 
 	public MancalaModel() {
 		listenerList = new ArrayList<>();
@@ -28,6 +33,36 @@ ArrayList<Boolean> playerTurnList;
 		PlayerAOld = new ArrayList<>();
 		PlayerBOld = new ArrayList<>();
 		playerTurnList = new ArrayList<>();
+		colorList = new ArrayList<>();
+		colorMap = new HashMap<>();
+		putColorInMap();
+	}
+	
+	public void setColor(Strategy strategy) {
+		this.strategy = strategy;
+		setColorList(strategy.getColor());
+	}
+	
+	public ArrayList<String> getColorList(){
+		return colorList;
+	}
+	
+	public void setColorList(ArrayList<String> colorList) {
+		this.colorList = (ArrayList<String>) colorList.clone();
+	}
+	
+	public HashMap<Integer,Color> getColorMap(){
+		return colorMap;
+	}
+	
+	public void putColorInMap() {
+		colorMap.put(1, Color.CYAN);
+		colorMap.put(2, Color.BLUE);
+		colorMap.put(3, Color.DARK_GRAY);
+		colorMap.put(4, Color.RED);
+		colorMap.put(5, Color.GREEN);
+		colorMap.put(6, Color.MAGENTA);
+		colorMap.put(7, Color.ORANGE);
 	}
 	
 	//Adds initial 3/4 stones into ArrayList for Player A and Player B

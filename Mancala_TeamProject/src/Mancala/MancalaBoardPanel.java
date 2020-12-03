@@ -2,15 +2,6 @@ package Mancala;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,14 +13,16 @@ StonePit stonePit;
 JLabel stonePitLabel;
 
 
-	public MancalaBoardPanel () {
+	public MancalaBoardPanel (MancalaModel model) {
+		this.model = model;
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridheight = 2;
-		mancalaPit = new MancalaPit();
+		mancalaPit = new MancalaPit(model);
 		JLabel mancalaPitB = new JLabel(mancalaPit);
 		add(mancalaPitB,c);
 		
@@ -38,7 +31,7 @@ JLabel stonePitLabel;
 		c.gridheight = 1;
 		c.anchor = GridBagConstraints.PAGE_START;
 		for (int i = 0; i < 6; i++) {
-			stonePit= new StonePit();
+			stonePit= new StonePit(model,i);
 			stonePitLabel = new JLabel(stonePit);
 			add(stonePitLabel,c);
 			c.gridx++;
@@ -48,7 +41,7 @@ JLabel stonePitLabel;
 		c.gridy = 1;
 		c.anchor = GridBagConstraints.PAGE_END;
 		for (int i = 0; i < 6; i++) {
-			stonePit= new StonePit();
+			stonePit= new StonePit(model,i);
 			stonePitLabel = new JLabel(stonePit);
 			add(stonePitLabel,c);
 			c.gridx++;
@@ -57,7 +50,7 @@ JLabel stonePitLabel;
 		c.gridx = 7;
 		c.gridy = 0;
 		c.gridheight = 2;
-		mancalaPit = new MancalaPit();
+		mancalaPit = new MancalaPit(model);
 		JLabel mancalaPitA = new JLabel(mancalaPit);
 		add(mancalaPitA,c);
 		

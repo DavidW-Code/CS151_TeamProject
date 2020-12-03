@@ -151,7 +151,7 @@ ArrayList<JLabel> stoneLabelB;
 			stonePitBLabel.setPreferredSize(new Dimension (115,115));
 			stonePitBLabel.setLayout(new FlowLayout());
 			for (int j = 0; j < PlayerB.get(i); j++) {
-				stone = new Stone();
+				stone = new Stone(model);
 				JLabel stoneLabel = new JLabel(stone);
 				stonePitBLabel.add(stoneLabel);
 			}
@@ -275,7 +275,7 @@ ArrayList<JLabel> stoneLabelB;
 			stonePitALabel.setPreferredSize(new Dimension (115,115));
 			stonePitALabel.setLayout(new FlowLayout());
 			for (int j = 0; j< PlayerA.get(i); j++) {
-				stone = new Stone();
+				stone = new Stone(model);
 				JLabel stoneLabel = new JLabel(stone);
 				stonePitALabel.add(stoneLabel);
 			}
@@ -349,7 +349,7 @@ ArrayList<JLabel> stoneLabelB;
 			diff = stoneNum - labelStoneCount;
 
 			while (diff > 0) {
-				stone = new Stone();
+				stone = new Stone(model);
 				JLabel newStone = new JLabel(stone);
 				stoneLabel.add(newStone);
 				diff--;
