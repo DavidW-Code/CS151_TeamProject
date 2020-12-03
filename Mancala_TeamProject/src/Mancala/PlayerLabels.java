@@ -21,6 +21,7 @@ JLabel mancalaCount;
 Font myFont = new Font("Serif", Font.BOLD, 20);
 MancalaModel model;
 boolean PlayerATurn;
+boolean clickOnce = false;
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
 ArrayList<JLabel> mancalaCountLabels;
@@ -52,13 +53,10 @@ ArrayList<JLabel> mancalaCountLabels;
 		JButton undoButton = new JButton("Undo");
 		undoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//Not updating correctly. Pre and Post are the same
-				System.out.println(model.getPlayerAStones());
-				System.out.println(model.getPlayerBStones());
-				model.update(model.getOldAStones(), model.getOldBStones(), model.getPlayerATurn());
-				System.out.println(model.getPlayerAStones());
-				System.out.println(model.getPlayerBStones());
+				if (!clickOnce) {
+					model.update(model.getOldPlayerA(), model.getOldPlayerB(), model.getOldTurn());
+					clickOnce = true;
+				}
 			}
 		});
 		topDisplay.add(undoButton,c);
@@ -93,6 +91,7 @@ ArrayList<JLabel> mancalaCountLabels;
 		this.PlayerA = model.getPlayerAStones();
 		this.PlayerB = model.getPlayerBStones();
 		this.PlayerATurn = model.getPlayerATurn();
+		this.clickOnce = false;
 		
 		//Count player stones
 		mancalaCountLabels.get(0).setText("B Stones: " + PlayerB.get(6));

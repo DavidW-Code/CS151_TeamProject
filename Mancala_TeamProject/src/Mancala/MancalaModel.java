@@ -16,6 +16,7 @@ ArrayList<Integer> PlayerB;
 
 ArrayList<Integer> PlayerAOld;
 ArrayList<Integer> PlayerBOld;
+boolean oldPlayerATurn;
 
 
 	public MancalaModel() {
@@ -39,20 +40,6 @@ ArrayList<Integer> PlayerBOld;
 		PlayerAOld = PlayerA;
 		PlayerBOld = PlayerB;
 		
-	}
-	
-	public ArrayList<Integer> getOldAStones() {
-		return PlayerAOld;
-	}
-	
-	public ArrayList<Integer> getOldBStones(){
-		return PlayerBOld;
-	}
-	
-	//Set undo stones arraylist
-	public void setUndoStones(ArrayList<Integer> PlayerA, ArrayList<Integer> PlayerB) {
-		this.PlayerAOld = PlayerA;
-		this.PlayerBOld = PlayerB;
 	}
 	
 	//Get the Stones in PlayerA;
@@ -83,6 +70,30 @@ ArrayList<Integer> PlayerBOld;
 	//Boolean check if it's Player A's turn
 	public void setPlayerATurn(boolean PlayerATurn) {
 		this.PlayerATurn = PlayerATurn;
+	}
+	
+	public ArrayList<Integer> getOldPlayerA(){
+		return PlayerAOld;
+	}
+	
+	public ArrayList<Integer> getOldPlayerB(){
+		return PlayerBOld;
+	}
+	
+	public boolean getOldTurn() {
+		return oldPlayerATurn;
+	}
+	
+	public void setOldPlayerA(ArrayList<Integer> oldPlayerA) {
+		this.PlayerAOld = (ArrayList<Integer>) oldPlayerA.clone();
+	}
+	
+	public void setOldPlayerB(ArrayList<Integer> oldPlayerB) {
+		this.PlayerBOld = (ArrayList<Integer>) oldPlayerB.clone();
+	}
+	
+	public void setOldPlayerTurn(boolean oldTurn) {
+		this.oldPlayerATurn = oldTurn;
 	}
 	
 	//Boolean check to end game

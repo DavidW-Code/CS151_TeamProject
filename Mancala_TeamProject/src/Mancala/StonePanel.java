@@ -2,8 +2,6 @@ package Mancala;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -17,8 +15,13 @@ public class StonePanel extends JPanel implements ChangeListener{
 MancalaModel model;
 Stone stone;
 boolean pressed;
-boolean PlayerATurn;
+boolean PlayerATurn = true;
 int lastIndex;
+int xCoordB = 155;
+int yCoordB = 95;
+int xCoordA = 155;
+int yCoordA = 325;
+int space = 115;
 
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
@@ -32,21 +35,15 @@ ArrayList<JLabel> stoneLabelB;
 		stoneLabelA = new ArrayList<>();
 		stoneLabelB = new ArrayList<>();
 		
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		setLayout(null);
 		
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridheight = 2;
 		JLabel mancalaLabelB = new JLabel();
 		mancalaLabelB.setLayout(new FlowLayout());
 		mancalaLabelB.setPreferredSize(new Dimension(150,350));
-		add(mancalaLabelB, c);
+		mancalaLabelB.setBounds(5, 100, 150, 350);
+		add(mancalaLabelB);
 		
-		c.gridx = 1;
-		c.gridy = 0;
-		c.gridheight = 1;
-		c.anchor = GridBagConstraints.PAGE_START;
+		
 		for (int i = 0; i < 6; i++) {
 			JLabel stonePitBLabel = new JLabel();
 			
@@ -57,6 +54,9 @@ ArrayList<JLabel> stoneLabelB;
 				
 				public void mouseReleased(MouseEvent e) {
 					if (pressed) {
+						model.setOldPlayerA(PlayerA);
+						model.setOldPlayerB(PlayerB);
+						model.setOldPlayerTurn(PlayerATurn);
 						for (int i = 0; i < stoneLabelB.size(); i++) {
 							if (stoneLabelB.get(i).equals(e.getComponent())) {
 								boolean inB = true;
@@ -152,14 +152,19 @@ ArrayList<JLabel> stoneLabelB;
 				JLabel stoneLabel = new JLabel(stone);
 				stonePitBLabel.add(stoneLabel);
 			}
-			add(stonePitBLabel, c);
+			if (i == 0) {
+				stonePitBLabel.setBounds(xCoordB, yCoordB, 115, 115);
+			}
+			else {
+				stonePitBLabel.setBounds(xCoordB + space, yCoordB, 115, 115);
+				space += 115;
+			}
+			
+			add(stonePitBLabel);
 			stoneLabelB.add(stonePitBLabel);
-			c.gridx++;
 		}
 		
-		c.gridx = 1;
-		c.gridy = 1;
-		c.anchor = GridBagConstraints.PAGE_END;
+		space = 115;
 		for (int i = 0; i < 6; i++) {
 			JLabel stonePitALabel = new JLabel();
 			
@@ -171,6 +176,9 @@ ArrayList<JLabel> stoneLabelB;
 				
 				public void mouseReleased(MouseEvent e) {
 					if (pressed) {
+						model.setOldPlayerA(PlayerA);
+						model.setOldPlayerB(PlayerB);
+						model.setOldPlayerTurn(PlayerATurn);
 						for (int i = 0; i < stoneLabelA.size(); i++) {
 							if (stoneLabelA.get(i).equals(e.getComponent())) {
 								boolean inA = true;
@@ -265,18 +273,23 @@ ArrayList<JLabel> stoneLabelB;
 				JLabel stoneLabel = new JLabel(stone);
 				stonePitALabel.add(stoneLabel);
 			}
-			add(stonePitALabel, c);
+			if (i == 0) {
+				stonePitALabel.setBounds(xCoordA, yCoordA, 115, 115);
+			}
+			else {
+				stonePitALabel.setBounds(xCoordA + space, yCoordA, 115, 115);
+				space += 115;
+			}
+			add(stonePitALabel);
 			stoneLabelA.add(stonePitALabel);
-			c.gridx++;
 		}
 		
-		c.gridx = 7;
-		c.gridy = 0;
-		c.gridheight = 2;
+		
 		JLabel mancalaLabelA = new JLabel();
 		mancalaLabelA.setLayout(new FlowLayout());
 		mancalaLabelA.setPreferredSize(new Dimension(150,350));
-		add(mancalaLabelA, c);
+		mancalaLabelA.setBounds(845, 100, 150, 350);
+		add(mancalaLabelA);
 		
 		stoneLabelA.add(mancalaLabelA);
 		stoneLabelB.add(mancalaLabelB);
@@ -328,7 +341,7 @@ ArrayList<JLabel> stoneLabelB;
 		
 		if (labelStoneCount < stoneNum) {
 			diff = stoneNum - labelStoneCount;
-			
+
 			while (diff > 0) {
 				stone = new Stone();
 				JLabel newStone = new JLabel(stone);
@@ -356,6 +369,7 @@ ArrayList<JLabel> stoneLabelB;
 	public void stateChanged(ChangeEvent e) {
 		this.PlayerA = model.getPlayerAStones();
 		this.PlayerB = model.getPlayerBStones();
+		this.PlayerATurn = model.getPlayerATurn();
 		
 		for (int i = 0; i < 7; i++) {
 			stoneRepaint(stoneLabelA.get(i), PlayerA.get(i));
