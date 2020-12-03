@@ -54,6 +54,7 @@ ArrayList<JLabel> stoneLabelB;
 				
 				public void mouseReleased(MouseEvent e) {
 					if (pressed) {
+						model.addPlayerTurn(PlayerATurn);
 						model.setOldPlayerA(PlayerA);
 						model.setOldPlayerB(PlayerB);
 						model.setOldPlayerTurn(PlayerATurn);
@@ -68,54 +69,49 @@ ArrayList<JLabel> stoneLabelB;
 								int stoneCount = PlayerB.get(indexB);
 								
 								if (stoneCount != 0) {
-								
 									PlayerB.set(indexB, 0);
 									while (loopCount < stoneCount) {
-										//Fills Player B Row
-										if (indexB - 1 >= 0) {
-											PlayerB.set(indexB - 1, PlayerB.get(indexB - 1) + 1);
-											inB = true;
-											inMancala = false;
-											lastIndex = indexB - 1;
-										}
-										
-										else {
-											//Fills Mancala B
-											if (indexA == 0 && indexB == 0) {
-												PlayerB.set(PlayerB.size() - 1, PlayerB.get(PlayerB.size() - 1) + 1);
+										if(inB && !inMancala) {
+											indexB--;
+											if (indexB >= 0) {
+												PlayerB.set(indexB, PlayerB.get(indexB) + 1);
+												inB = true;
+												inMancala = false;
+											}
+											else {
 												inB = false;
 												inMancala = true;
 											}
-											//Fills Row A
-											else if(indexA <= 5) {
-												PlayerA.set(indexA, PlayerA.get(indexA) + 1);
-												indexA++;
-												inB = false;
-												inMancala = false;
-											}
-											//Fills Row B after Row A
-											else {
-												inMancala = false;
+											lastIndex = indexB;
+										}
+										
+										else {
+											//Fill Row A
+											PlayerA.set(indexA, PlayerA.get(indexA) + 1);
+											indexA++;
+											if (indexA > 5) {
+												indexB = 6;
 												inB = true;
-												int indexBreset = 5;
-												lastIndex = indexBreset;
-												
-												//Maybe do one more mancala B put
-												
-												PlayerB.set(indexBreset, PlayerB.get(indexBreset) + 1);
-												indexBreset--;
+											}
+										}
+										
+										if (!inB && inMancala) {
+											PlayerB.set(PlayerB.size() - 1, PlayerB.get(PlayerB.size() - 1) + 1);
+											inMancala = false;
+											if (loopCount == stoneCount - 1) {
+												inMancala = true;
 											}
 										}
 										
 										if (loopCount == stoneCount - 1) {
-											//Check Last In Opposite
 											if (inB && PlayerB.get(lastIndex) == 1) {
 												int oppositeStones = PlayerA.get(lastIndex);
 												PlayerA.set(lastIndex, 0);
-												PlayerB.set(PlayerB.size() - 1, PlayerB.get(PlayerB.size() - 1) + oppositeStones);
+												PlayerB.set(lastIndex, 0);
+												PlayerB.set(PlayerB.size() - 1, PlayerB.get(PlayerB.size() - 1) + oppositeStones + 1);
 												PlayerATurn = true;
 											}
-											//Check Last In Mancala
+											//Check Mancala
 											else if (inMancala) {
 												PlayerATurn = false;
 											}
@@ -124,10 +120,8 @@ ArrayList<JLabel> stoneLabelB;
 											}
 										}
 										
-										
-										indexB--;
 										loopCount++;
-									}						
+									}				
 								}
 								
 								break;
@@ -176,6 +170,7 @@ ArrayList<JLabel> stoneLabelB;
 				
 				public void mouseReleased(MouseEvent e) {
 					if (pressed) {
+						model.addPlayerTurn(PlayerATurn);
 						model.setOldPlayerA(PlayerA);
 						model.setOldPlayerB(PlayerB);
 						model.setOldPlayerTurn(PlayerATurn);
@@ -194,46 +189,48 @@ ArrayList<JLabel> stoneLabelB;
 									PlayerA.set(indexA, 0);
 									while (loopCount < stoneCount) {
 										//Fills Row A
-										if (indexA + 1 <= 5) {
-											PlayerA.set(indexA + 1, PlayerA.get(indexA + 1) + 1);
-											inA = true;
-											inMancala = false;
-											lastIndex = indexA + 1;
-										}
-										
-										else {
-											//Fills Mancala A
-											if (indexA == 5 && indexB == 5) {
-												PlayerA.set(PlayerA.size() - 1, PlayerA.get(PlayerA.size() - 1) + 1);
+										if (inA && !inMancala) {
+											indexA++;
+											if (indexA <= 5) {
+												PlayerA.set(indexA, PlayerA.get(indexA) + 1);
+												inA = true;
+												inMancala = false;
+											}
+											else {
 												inA = false;
 												inMancala = true;
 											}
-											//Fills Row B
-											else if(indexB >= 0) {
-												PlayerB.set(indexB, PlayerB.get(indexB) + 1);
-												indexB--;
-												inA = false;
-												inMancala = false;
-											}
-											//Fills Row A after Row B
-											else {
+											
+											lastIndex = indexA;
+
+										}
+										
+										else {
+											//Fill Row B
+											PlayerB.set(indexB, PlayerB.get(indexB) + 1);
+											indexB--;
+											if (indexB < 0) {
+												indexA = -1;
 												inA = true;
-												inMancala = false;
-												int indexAreset = 0;
-												lastIndex = indexAreset;
-												
-												PlayerA.set(indexAreset, PlayerA.get(indexAreset) + 1);
-												indexAreset++;
-												
 											}
 											
 										}
+										
+										if (!inA && inMancala) {
+											PlayerA.set(PlayerA.size() - 1, PlayerA.get(PlayerA.size() - 1) + 1);
+											inMancala = false;
+											if (loopCount == stoneCount - 1) {
+												inMancala = true;
+											}
+										}
+										
 										if (loopCount == stoneCount - 1) {
 											//Check Opposite
 											if (inA && PlayerA.get(lastIndex) == 1) {
 												int oppositeStones = PlayerB.get(lastIndex);
 												PlayerB.set(lastIndex, 0);
-												PlayerA.set(PlayerA.size() - 1, PlayerA.get(PlayerA.size() - 1) + oppositeStones);
+												PlayerA.set(lastIndex, 0);
+												PlayerA.set(PlayerA.size() - 1, PlayerA.get(PlayerA.size() - 1) + oppositeStones + 1);
 												PlayerATurn = false;
 											}
 											//Check Mancala
@@ -245,7 +242,7 @@ ArrayList<JLabel> stoneLabelB;
 											}
 										}
 										
-										indexA++;
+										
 										loopCount++;
 									}
 								}
@@ -375,6 +372,7 @@ ArrayList<JLabel> stoneLabelB;
 			stoneRepaint(stoneLabelA.get(i), PlayerA.get(i));
 			stoneRepaint(stoneLabelB.get(i), PlayerB.get(i));
 		}
+		revalidate();
 	}
 
 }

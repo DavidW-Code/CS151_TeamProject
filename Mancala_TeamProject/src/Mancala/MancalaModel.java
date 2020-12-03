@@ -18,6 +18,8 @@ ArrayList<Integer> PlayerAOld;
 ArrayList<Integer> PlayerBOld;
 boolean oldPlayerATurn;
 
+ArrayList<Boolean> playerTurnList;
+
 
 	public MancalaModel() {
 		listenerList = new ArrayList<>();
@@ -25,6 +27,7 @@ boolean oldPlayerATurn;
 		PlayerB = new ArrayList<>();
 		PlayerAOld = new ArrayList<>();
 		PlayerBOld = new ArrayList<>();
+		playerTurnList = new ArrayList<>();
 	}
 	
 	//Adds initial 3/4 stones into ArrayList for Player A and Player B
@@ -96,6 +99,18 @@ boolean oldPlayerATurn;
 		this.oldPlayerATurn = oldTurn;
 	}
 	
+	public void addPlayerTurn(boolean playerTurn) {
+		playerTurnList.add(playerTurn);
+	}
+	
+	public ArrayList<Boolean> getPlayerTurnList(){
+		return playerTurnList;
+	}
+	
+	public void clearTurnList() {
+		playerTurnList.clear();
+	}
+	
 	//Boolean check to end game
 	public boolean endGame() {
 		return endGame;
@@ -111,10 +126,10 @@ boolean oldPlayerATurn;
 	}
 	
 	//Update method used to call stateChanged
-	public void update(ArrayList<Integer> newPlayerA, ArrayList<Integer> newPlayerB, boolean PlayerATurn) {
+	public void update(ArrayList<Integer> newPlayerA, ArrayList<Integer> newPlayerB, boolean newPlayerATurn) {
 		setPlayerAStones(newPlayerA);
 		setPlayerBStones(newPlayerB);
-		setPlayerATurn(PlayerATurn);
+		setPlayerATurn(newPlayerATurn);
 		for (ChangeListener l: listenerList) {
 			l.stateChanged(new ChangeEvent(this));
 		}

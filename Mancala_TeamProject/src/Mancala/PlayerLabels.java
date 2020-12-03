@@ -22,6 +22,7 @@ Font myFont = new Font("Serif", Font.BOLD, 20);
 MancalaModel model;
 boolean PlayerATurn;
 boolean clickOnce = false;
+boolean clickThree = false;
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
 ArrayList<JLabel> mancalaCountLabels;
@@ -54,7 +55,11 @@ ArrayList<JLabel> mancalaCountLabels;
 		undoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!clickOnce) {
-					model.update(model.getOldPlayerA(), model.getOldPlayerB(), model.getOldTurn());
+					
+					if (!clickThree) {
+						model.update(model.getOldPlayerA(), model.getOldPlayerB(), model.getOldTurn());
+					}
+					
 					clickOnce = true;
 				}
 			}
@@ -62,7 +67,9 @@ ArrayList<JLabel> mancalaCountLabels;
 		topDisplay.add(undoButton,c);
 		add(topDisplay, BorderLayout.PAGE_START);
 		
-		mancalaCount = new JLabel("B Stones: " + PlayerB.get(6), JLabel.CENTER);
+		mancalaCount = new JLabel("B Stones: " + PlayerB.get(6));
+		mancalaCount.setVerticalAlignment(JLabel.BOTTOM);
+		mancalaCount.setHorizontalAlignment(JLabel.CENTER);
 		mancalaCount.setFont(myFont);
 		mancalaCount.setPreferredSize(new Dimension(150,450));
 		add(mancalaCount, BorderLayout.LINE_START);
@@ -74,13 +81,17 @@ ArrayList<JLabel> mancalaCountLabels;
 		add(PlayerID, BorderLayout.CENTER);
 		mancalaCountLabels.add(PlayerID);
 		
-		mancalaCount = new JLabel("A Stones: " + PlayerA.get(6), JLabel.CENTER);
+		mancalaCount = new JLabel("A Stones: " + PlayerA.get(6));
+		mancalaCount.setVerticalAlignment(JLabel.BOTTOM);
+		mancalaCount.setHorizontalAlignment(JLabel.CENTER);
 		mancalaCount.setFont(myFont);
 		mancalaCount.setPreferredSize(new Dimension(150,450));
 		add(mancalaCount, BorderLayout.LINE_END);
 		mancalaCountLabels.add(mancalaCount);
 		
-		PlayerID = new JLabel("Player A", JLabel.CENTER);
+		PlayerID = new JLabel("Player A");
+		PlayerID.setVerticalAlignment(JLabel.TOP);
+		PlayerID.setHorizontalAlignment(JLabel.CENTER);
 		PlayerID.setFont(myFont);
 		PlayerID.setPreferredSize(new Dimension(1000,25));
 		add(PlayerID, BorderLayout.PAGE_END);
@@ -88,10 +99,23 @@ ArrayList<JLabel> mancalaCountLabels;
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
+		if (model.getPlayerTurnList().size() > 3) {
+			int lastIndex = model.getPlayerTurnList().size() - 1;
+			if (model.getPlayerTurnList().get(lastIndex) == model.getPlayerTurnList().get(lastIndex - 1) && model.getPlayerTurnList().get(lastIndex - 1) == model.getPlayerTurnList().get(lastIndex - 2)) {
+				clickThree = true;
+			}
+			else {
+				model.clearTurnList();
+				model.addPlayerTurn(model.oldPlayerATurn);
+				clickThree = false;
+			}
+		}
+		
 		this.PlayerA = model.getPlayerAStones();
 		this.PlayerB = model.getPlayerBStones();
 		this.PlayerATurn = model.getPlayerATurn();
 		this.clickOnce = false;
+		
 		
 		//Count player stones
 		mancalaCountLabels.get(0).setText("B Stones: " + PlayerB.get(6));

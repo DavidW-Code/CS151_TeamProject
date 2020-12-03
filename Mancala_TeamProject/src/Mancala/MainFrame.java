@@ -37,7 +37,7 @@ StonePanel stonePanel;
 		pane.add(stonePanel, JLayeredPane.POPUP_LAYER);
 		
 		add(pane);
-		setBounds(0,0,1000,500);
+		setBounds(0,0,1000,520);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
