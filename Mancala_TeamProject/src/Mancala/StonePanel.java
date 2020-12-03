@@ -16,12 +16,21 @@ MancalaModel model;
 Stone stone;
 boolean pressed;
 boolean PlayerATurn = true;
-int lastIndex;
 int xCoordB = 155;
 int yCoordB = 95;
 int xCoordA = 155;
 int yCoordA = 325;
 int space = 115;
+
+int indexB;
+int indexA;
+int loopCount;
+int stoneCount;
+int lastIndex;
+
+boolean inA;
+boolean inB;
+boolean inMancala;
 
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
@@ -60,13 +69,13 @@ ArrayList<JLabel> stoneLabelB;
 						model.setOldPlayerTurn(PlayerATurn);
 						for (int i = 0; i < stoneLabelB.size(); i++) {
 							if (stoneLabelB.get(i).equals(e.getComponent())) {
-								boolean inB = true;
-								boolean inMancala = false;
+								inB = true;
+								inMancala = false;
 								
-								int indexB = i;
-								int indexA = 0;
-								int loopCount = 0;
-								int stoneCount = PlayerB.get(indexB);
+								indexB = i;
+								indexA = 0;
+								loopCount = 0;
+								stoneCount = PlayerB.get(indexB);
 								
 								if (stoneCount != 0) {
 									PlayerB.set(indexB, 0);
@@ -176,13 +185,13 @@ ArrayList<JLabel> stoneLabelB;
 						model.setOldPlayerTurn(PlayerATurn);
 						for (int i = 0; i < stoneLabelA.size(); i++) {
 							if (stoneLabelA.get(i).equals(e.getComponent())) {
-								boolean inA = true;
-								boolean inMancala = false;
+								inA = true;
+								inMancala = false;
 								
-								int indexA = i;
-								int indexB = 5;
-								int loopCount = 0;
-								int stoneCount = PlayerA.get(indexA);
+								indexA = i;
+								indexB = 5;
+								loopCount = 0;
+								stoneCount = PlayerA.get(indexA);
 								
 								if (stoneCount != 0) {
 								
