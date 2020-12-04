@@ -15,6 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * PlayerLabels class displays relevant information to the game and undo button
+ * @author davidwang
+ *
+ */
 public class PlayerLabels extends JPanel implements ChangeListener{
 JLabel PlayerID;
 JLabel mancalaCount;
@@ -26,7 +31,12 @@ boolean clickThree = false;
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
 ArrayList<JLabel> mancalaCountLabels;
-
+	
+	/*
+	 * PlayerLabels that display player sides and stone count
+	 * Undo button is displayed on top left, when called it updates stones using previous count
+	 * Button can only be clicked three times by one player per turn
+	 */
 	public PlayerLabels(MancalaModel model) {
 		this.model = model;
 		this.PlayerA = model.getPlayerAStones();
@@ -97,6 +107,9 @@ ArrayList<JLabel> mancalaCountLabels;
 		add(PlayerID, BorderLayout.PAGE_END);
 	}
 
+	/*
+	 * Method that updates information to PlayerLabels class from MancalaModel
+	 */
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (model.getPlayerTurnList().size() > 3) {

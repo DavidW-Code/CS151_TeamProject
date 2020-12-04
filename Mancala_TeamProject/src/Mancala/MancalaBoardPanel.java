@@ -6,13 +6,22 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * MancalaBoardPanel is a JPanel holding the base layer of mancala board
+ * @author davidwang
+ *
+ */
 public class MancalaBoardPanel extends JPanel{
 MancalaModel model;
 MancalaPit mancalaPit;
 StonePit stonePit;
 JLabel stonePitLabel;
 
-
+	
+	/*
+	 * MancalaBoardPanel contains JLabels that display mancala pit and stone pit
+	 * GridBagLayout is used to organize pits into correct positons
+	 */
 	public MancalaBoardPanel (MancalaModel model) {
 		this.model = model;
 		

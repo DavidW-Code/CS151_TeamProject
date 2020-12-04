@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 import javax.swing.Icon;
 
+/**
+ * MancalaPit icon class that draws mancala pit
+ * @author davidwang
+ *
+ */
 public class MancalaPit implements Icon{
 private static final int PIT_WIDTH = 150;
 private static final int PIT_HEIGHT = 350;
@@ -17,6 +22,9 @@ ArrayList<String> colorList;
 Graphics2D g2;
 Color color;
 
+	/*
+	 * MancalaPit that initializes colors from strategy
+	 */
 	public MancalaPit(MancalaModel model) {
 		this.model = model;
 		colorList = model.getColorList();
@@ -28,6 +36,9 @@ Color color;
 		}
 	}
 	
+	/*
+	 * paintIcon that draws mancala pit
+	 */
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		g2 = (Graphics2D) g;
@@ -37,11 +48,16 @@ Color color;
 		
 	}
 
-	
+	/*
+	 * Getter method returns pit width
+	 */
 	public int getIconWidth() {
 		return PIT_WIDTH;
 	}
 	
+	/*
+	 * Getter method returns pit height
+	 */
 	public int getIconHeight() {
 		return PIT_HEIGHT;
 	}

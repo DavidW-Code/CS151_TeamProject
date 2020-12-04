@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * EndGameFrame displays end game information when conditions are fulfilled
+ * @author davidwang
+ *
+ */
 public class EndGameFrame extends JFrame{
 MancalaModel model;
 JLabel stoneCount;
@@ -15,6 +20,10 @@ int totalB;
 ArrayList<Integer> PlayerA;
 ArrayList<Integer> PlayerB;
 
+	/*
+	 * EndGameFrame displays JFrame that displays total stone count of A and B
+	 * Also displays a message of who won or if it is a tie
+	 */
 	public EndGameFrame(MancalaModel model) {
 		this.model = model;
 		this.PlayerA = model.getPlayerAStones();

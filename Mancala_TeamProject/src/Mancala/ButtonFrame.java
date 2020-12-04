@@ -8,9 +8,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+/**
+ * ButtonFrame initalizes and displays first screen selection to determine how many stones in initial mancala board
+ * @author davidwang
+ *
+ */
 public class ButtonFrame {
 MancalaModel model;
 
+	/*
+	 * ButtonFrame JFrame that contains buttons that can be clicked to determine initial stone count
+	 * After click, ButtonFrame is disposed and StyleFrame is opened
+	 */
 	public ButtonFrame(MancalaModel model) {
 		this.model = model;
 		JFrame buttonFrame = new JFrame();

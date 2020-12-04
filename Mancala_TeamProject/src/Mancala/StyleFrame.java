@@ -8,9 +8,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+/**
+ * StyleFrame displayed after ButtonFrame and displays selection for board styles
+ * @author davidwang
+ *
+ */
 public class StyleFrame{
 MancalaModel model;
 
+	/*
+	 * StyleFrame JFrame that contains buttons that can be clicked to determine board style
+	 * After click, StyleFrame is disposed and MainFrame is opened
+	 */
 	public StyleFrame(MancalaModel model) {
 		this.model = model;
 		

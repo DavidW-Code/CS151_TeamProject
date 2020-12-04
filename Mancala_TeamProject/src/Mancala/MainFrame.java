@@ -6,6 +6,11 @@ import javax.swing.JLayeredPane;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
+/**
+ * MainFrame initalizes and displays all relevant components of the mancala board
+ * @author davidwang
+ *
+ */
 public class MainFrame extends JFrame{
 MancalaModel model;
 MancalaBoardPanel mancalaPanel;
@@ -13,6 +18,13 @@ PlayerLabels PLabels;
 PitLabels pitLabel;
 StonePanel stonePanel;
 
+	/*
+	 * MainFrame is made up on 4 layers on top of each other
+	 * mancalaPanel is lowest layer that displays the board
+	 * pLabels is on top of mancalaPanel and displays player information
+	 * pitLabels is on top of pLabels and displays pit count
+	 * stonePanel is top most layer and displays stones
+	 */
 	public MainFrame(MancalaModel model) {
 		this.model = model;
 		

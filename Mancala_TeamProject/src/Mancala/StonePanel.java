@@ -11,6 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * StonePanel class that displays stone count
+ * @author davidwang,zanderbonnett
+ *
+ */
 public class StonePanel extends JPanel implements ChangeListener{
 MancalaModel model;
 Stone stone;
@@ -37,6 +42,10 @@ ArrayList<Integer> PlayerB;
 ArrayList<JLabel> stoneLabelA;
 ArrayList<JLabel> stoneLabelB;
 
+	/*
+	 * StonelPanel initializes and displays stone count in correct position
+	 * ActionListeners are attached to each stoneLabel so when clicked, MancalaModel is updated and stones are redrawn
+	 */
 	public StonePanel(MancalaModel model) {
 		this.model = model;
 		this.PlayerA = model.getPlayerAStones();
@@ -56,6 +65,7 @@ ArrayList<JLabel> stoneLabelB;
 		for (int i = 0; i < 6; i++) {
 			JLabel stonePitBLabel = new JLabel();
 			
+			//ActionListener for Player B
 			stonePitBLabel.addMouseListener(new MouseAdapter(){
 				public void mousePressed(MouseEvent e) {
 					pressed = true;
@@ -63,10 +73,14 @@ ArrayList<JLabel> stoneLabelB;
 				
 				public void mouseReleased(MouseEvent e) {
 					if (pressed) {
+						
+						//updates previous turn information to MancalaModel
 						model.addPlayerTurn(PlayerATurn);
 						model.setOldPlayerA(PlayerA);
 						model.setOldPlayerB(PlayerB);
 						model.setOldPlayerTurn(PlayerATurn);
+						
+						//Loops that checks for correct stoneLabel to correct clicked component
 						for (int i = 0; i < stoneLabelB.size(); i++) {
 							if (stoneLabelB.get(i).equals(e.getComponent())) {
 								inB = true;
@@ -77,6 +91,7 @@ ArrayList<JLabel> stoneLabelB;
 								loopCount = 0;
 								stoneCount = PlayerB.get(indexB);
 								
+								//Updates stone count from Player B -> Pit B -> Player A -> Player B
 								if (stoneCount != 0) {
 									PlayerB.set(indexB, 0);
 									while (loopCount < stoneCount) {
@@ -137,10 +152,12 @@ ArrayList<JLabel> stoneLabelB;
 							}
 						}
 						
+						//Update new stone count to MancalaModel
 						model.update(PlayerA, PlayerB, PlayerATurn);
 						
 					}
 					
+					//End game check condition
 					if (checkAEnd() || checkBEnd()) {
 						endGameCount();
 						EndGameFrame endScreen = new EndGameFrame(model);
@@ -150,6 +167,8 @@ ArrayList<JLabel> stoneLabelB;
 			
 			stonePitBLabel.setPreferredSize(new Dimension (115,115));
 			stonePitBLabel.setLayout(new FlowLayout());
+			
+			//Draws stone count as stone icons into stone label
 			for (int j = 0; j < PlayerB.get(i); j++) {
 				stone = new Stone(model);
 				JLabel stoneLabel = new JLabel(stone);
@@ -171,18 +190,22 @@ ArrayList<JLabel> stoneLabelB;
 		for (int i = 0; i < 6; i++) {
 			JLabel stonePitALabel = new JLabel();
 			
+			//ActionListener for Player A
 			stonePitALabel.addMouseListener(new MouseAdapter(){
 				public void mousePressed(MouseEvent e) {
 					pressed = true;
-					
 				}
 				
 				public void mouseReleased(MouseEvent e) {
 					if (pressed) {
+						
+						//updates previous turn information to MancalaModel
 						model.addPlayerTurn(PlayerATurn);
 						model.setOldPlayerA(PlayerA);
 						model.setOldPlayerB(PlayerB);
 						model.setOldPlayerTurn(PlayerATurn);
+						
+						//Loops that checks for correct stoneLabel to correct clicked component
 						for (int i = 0; i < stoneLabelA.size(); i++) {
 							if (stoneLabelA.get(i).equals(e.getComponent())) {
 								inA = true;
@@ -193,8 +216,8 @@ ArrayList<JLabel> stoneLabelB;
 								loopCount = 0;
 								stoneCount = PlayerA.get(indexA);
 								
+								//Updates stone count from Player A -> Pit A -> Player B -> Player A
 								if (stoneCount != 0) {
-								
 									PlayerA.set(indexA, 0);
 									while (loopCount < stoneCount) {
 										//Fills Row A
@@ -260,10 +283,12 @@ ArrayList<JLabel> stoneLabelB;
 							}
 						}
 						
+						//Update new stone count to MancalaModel
 						model.update(PlayerA, PlayerB, PlayerATurn);
 						
 					}
 					
+					//End game check condition
 					if (checkAEnd() || checkBEnd()) {
 						endGameCount();
 						EndGameFrame endScreen = new EndGameFrame(model);
@@ -274,6 +299,7 @@ ArrayList<JLabel> stoneLabelB;
 			
 			stonePitALabel.setPreferredSize(new Dimension (115,115));
 			stonePitALabel.setLayout(new FlowLayout());
+			//Draws stone count as stone icons into stone label
 			for (int j = 0; j< PlayerA.get(i); j++) {
 				stone = new Stone(model);
 				JLabel stoneLabel = new JLabel(stone);
@@ -301,6 +327,9 @@ ArrayList<JLabel> stoneLabelB;
 		stoneLabelB.add(mancalaLabelB);
 	}
 
+	/*
+	 * Check if player B has no stones, if true then end game
+	 */
 	public boolean checkAEnd() {
 		boolean isEnd = true;
 		for (int i = 0; i < 6; i++) {
@@ -313,6 +342,9 @@ ArrayList<JLabel> stoneLabelB;
 		return isEnd;
 	}
 	
+	/*
+	 * Check if player B has no stones, if true then end game
+	 */
 	public boolean checkBEnd() {
 		boolean isEnd = true;
 		for (int i = 0; i < 6; i++) {
@@ -325,6 +357,9 @@ ArrayList<JLabel> stoneLabelB;
 		return isEnd;
 	}
 	
+	/*
+	 * Counts the total number of stones each player has when game ends
+	 */
 	public void endGameCount() {
 		int countA = 0;
 		int countB = 0;
@@ -341,6 +376,9 @@ ArrayList<JLabel> stoneLabelB;
 		
 	}
 	
+	/*
+	 * Method that repaints the stones in mancala board with new count
+	 */
 	public void stoneRepaint(JLabel stoneLabel, int stoneNum) {
 		int labelStoneCount = stoneLabel.getComponentCount();
 		int diff;
@@ -370,7 +408,9 @@ ArrayList<JLabel> stoneLabelB;
 		stoneLabel.repaint();
 	}
 	
-	
+	/*
+	 * ChangeListener method that updates new information to StonePanel class from MancalaModel
+	 */
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		this.PlayerA = model.getPlayerAStones();
