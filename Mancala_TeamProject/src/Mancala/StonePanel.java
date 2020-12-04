@@ -72,7 +72,7 @@ ArrayList<JLabel> stoneLabelB;
 				}
 				
 				public void mouseReleased(MouseEvent e) {
-					if (pressed) {
+					if (pressed && !PlayerATurn) {
 						
 						//updates previous turn information to MancalaModel
 						model.addPlayerTurn(PlayerATurn);
@@ -197,7 +197,7 @@ ArrayList<JLabel> stoneLabelB;
 				}
 				
 				public void mouseReleased(MouseEvent e) {
-					if (pressed) {
+					if (pressed && PlayerATurn) {
 						
 						//updates previous turn information to MancalaModel
 						model.addPlayerTurn(PlayerATurn);
